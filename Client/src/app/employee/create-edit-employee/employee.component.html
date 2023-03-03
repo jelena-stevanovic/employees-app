@@ -1,0 +1,77 @@
+<ng-template #loading>Loading...</ng-template>
+
+<div class="container mt-3" *ngIf="data$ | async as data; else loading">
+  <div class="row mt-2 justify-content-center">
+    <h2>Create Employee</h2>
+  </div>
+
+  <form #ngEmployee="ngForm" name="form" (ngSubmit)="saveEmployee(data.employee)" novalidate>
+
+    <div class="row mt-1 mb-3">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+        <div class="card card-container p-3">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" name="firstName" [(ngModel)]="data.employee.firstName" firstName
+                   #firstName="ngModel" required/>
+            <div class="alert-danger" *ngIf="ngEmployee.submitted && firstName.errors">
+              <div *ngIf="firstName.errors['required']">Invalid First Name</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">last Name</label>
+            <input type="text" class="form-control" name="lastName" [(ngModel)]="data.employee.lastName" lastName
+                   #lastName="ngModel" required/>
+            <div class="alert-danger" *ngIf="ngEmployee.submitted && lastName.errors">
+              <div *ngIf="lastName.errors['required']">Invalid Last Name</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="salary">Salary</label>
+            <input type="text" class="form-control" name="salary" [(ngModel)]="data.employee.salary" salary
+                   #salary="ngModel" required/>
+            <div class="alert-danger" *ngIf="ngEmployee.submitted && salary.errors">
+              <div *ngIf="salary.errors['required']">Invalid Salary</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="positionId">Position</label>
+
+            <select class="custom-select" aria-label="Default select example" name="positionId" [(ngModel)]="data.employee.positionId" positionId #positionId="ngModel" required>
+              <option value="" selected>Slecet Position</option>
+              <option *ngFor="let position of data.positions.positions" [value]="position.id">{{ position.title }}</option>
+            </select>
+
+            <div class="alert-danger" *ngIf="ngEmployee.submitted && positionId.errors">
+              <div *ngIf="positionId.errors['required']">Invalid Position Id</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+
+    <div class="row mt-2 justify-content-center">
+      <h2>Salary History</h2>
+    </div>
+
+    <div class="row mt-1 mb-3">
+    </div>
+
+    <div class="row mt-5 mb-3 justify-content-center align-items-center">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+        <div class="form-group">
+          <input type="submit" class="form-control btn btn-success" value="Save Employee">
+        </div>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+
+  </form>
+</div>

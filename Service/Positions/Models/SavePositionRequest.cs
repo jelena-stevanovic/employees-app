@@ -5,4 +5,6 @@ public class SavePositionRequest
     public int Id { get; set; }
         
     public string Title { get; set; }
+
+    public bool IsManager { get; set; }
 }

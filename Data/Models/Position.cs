@@ -10,6 +10,8 @@ public class Position
     public int Id { get; set; }
 
     public string Title { get; set; }
+
+    public bool IsManager { get; set; }
     
     public ICollection<SalaryHistory> SalaryHistories { get; set; } = new List<SalaryHistory>();
 }

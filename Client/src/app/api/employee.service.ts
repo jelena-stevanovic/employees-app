@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {filter, map, Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {Employee, GetEmployeesResponse, SaveEmployeeResponse} from "./models/employee";
 
@@ -26,5 +26,9 @@ export class EmployeeService {
 
   deleteEmployee(employeeId: number) {
     return this.httpClient.delete<Employee>(`${environment.apiUrl}/employees/${employeeId}`);
+  }
+
+  getManagers(): Observable<Employee[]>{
+    return this.getEmployees().pipe(map(er => er.employees.filter(e => e.position?.isManager)));
   }
 }

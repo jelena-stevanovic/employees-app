@@ -14,21 +14,21 @@
 
   <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="positions$">
     <thead>
-    <tr>
-      <th>Position ID</th>
-      <th>Position Title</th>
-      <th></th>
-    </tr>
+      <tr>
+        <th>Position ID</th>
+        <th>Position Title</th>
+        <th></th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let position of (positions$ | async)?.positions">
-      <td>{{ position.id }}</td>
-      <td>{{ position.title }}</td>
-      <td>
-        <button class="btn btn-info" [routerLink]="['/positions', position.id]">View</button> &nbsp;
-        <button class="btn btn-danger" (click)="removePosition(position)">Remove</button>
-      </td>
-    </tr>
+      <tr *ngFor="let position of (positions$ | async)?.positions">
+        <td>{{ position.id }}</td>
+        <td>{{ position.title }}</td>
+        <td>
+          <button class="btn btn-info" [routerLink]="['/positions', position.id]">View</button> &nbsp;
+          <button class="btn btn-danger" (click)="removePosition(position)">Remove</button>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>

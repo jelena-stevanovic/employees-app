@@ -4,12 +4,14 @@ import { PositionsComponent } from './position/positions.component';
 import {EmployeeListComponent} from "./employee/employee-list/employee-list.component";
 import {EmployeeComponent} from "./employee/create-edit-employee/employee.component";
 import {PositionListComponent} from "./position/position-list/position-list.component";
+import { EmployeeDetailsComponent } from './employee/employee-details/employee-details.component';
 
 const routes: Routes = [
   { path: 'employees', component: EmployeeListComponent},
   { path: 'employees/:id', component: EmployeeComponent},
   { path: 'positions', component: PositionListComponent},
   { path: 'positions/:id', component: PositionsComponent},
+  { path: 'employees/details/:id', component: EmployeeDetailsComponent},
   { path: '', redirectTo: 'employees', pathMatch: 'full' }
 ];
 

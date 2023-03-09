@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeesApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230303124433_InitialMigration")]
+    [Migration("20230308223349_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,6 +59,56 @@ namespace EmployeesApp.Data.Migrations
                     b.HasIndex("PositionId");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "Shannon",
+                            LastName = "Smith",
+                            ManagerId = 2,
+                            PositionId = 1,
+                            Salary = 1141m,
+                            VacationDays = 10
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FirstName = "Harry",
+                            LastName = "Williams",
+                            PositionId = 5,
+                            Salary = 1141m,
+                            VacationDays = 13
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FirstName = "Charles",
+                            LastName = "King",
+                            ManagerId = 2,
+                            PositionId = 2,
+                            Salary = 1235m,
+                            VacationDays = 20
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FirstName = "Simone",
+                            LastName = "Harper",
+                            PositionId = 7,
+                            Salary = 1362m,
+                            VacationDays = 16
+                        },
+                        new
+                        {
+                            Id = 5,
+                            FirstName = "Emma",
+                            LastName = "Taylor",
+                            ManagerId = 4,
+                            PositionId = 6,
+                            Salary = 1141m,
+                            VacationDays = 13
+                        });
                 });
 
             modelBuilder.Entity("EmployeesApp.Data.Models.EmployeeBonus", b =>
@@ -80,6 +130,38 @@ namespace EmployeesApp.Data.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("Bonuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BonusType = 0,
+                            EmployeeId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BonusType = 2,
+                            EmployeeId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BonusType = 3,
+                            EmployeeId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BonusType = 2,
+                            EmployeeId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BonusType = 1,
+                            EmployeeId = 5
+                        });
                 });
 
             modelBuilder.Entity("EmployeesApp.Data.Models.EmployeeDeduction", b =>
@@ -101,6 +183,38 @@ namespace EmployeesApp.Data.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("Deductions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DeductionType = 0,
+                            EmployeeId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DeductionType = 1,
+                            EmployeeId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DeductionType = 1,
+                            EmployeeId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DeductionType = 1,
+                            EmployeeId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DeductionType = 2,
+                            EmployeeId = 5
+                        });
                 });
 
             modelBuilder.Entity("EmployeesApp.Data.Models.Position", b =>
@@ -111,6 +225,9 @@ namespace EmployeesApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("IsManager")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -118,6 +235,50 @@ namespace EmployeesApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Positions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsManager = false,
+                            Title = "Back-end developer"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsManager = false,
+                            Title = "Front-end developer"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsManager = false,
+                            Title = "Full-stack developer"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsManager = false,
+                            Title = "UI designer"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsManager = true,
+                            Title = "Software development manager"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsManager = false,
+                            Title = "Software test engineer"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            IsManager = true,
+                            Title = "Lead developer"
+                        });
                 });
 
             modelBuilder.Entity("EmployeesApp.Data.Models.SalaryHistory", b =>
@@ -147,6 +308,24 @@ namespace EmployeesApp.Data.Migrations
                     b.HasIndex("PositionId");
 
                     b.ToTable("SalaryHistories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(2015, 3, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmployeeId = 1,
+                            PositionId = 1,
+                            Salary = 2350m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateTime(2018, 4, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmployeeId = 3,
+                            PositionId = 2,
+                            Salary = 2450m
+                        });
                 });
 
             modelBuilder.Entity("EmployeesApp.Data.Models.Employee", b =>
@@ -190,7 +369,7 @@ namespace EmployeesApp.Data.Migrations
 
             modelBuilder.Entity("EmployeesApp.Data.Models.SalaryHistory", b =>
                 {
-                    b.HasOne("EmployeesApp.Data.Models.Employee", "Employee")
+                    b.HasOne("EmployeesApp.Data.Models.Employee", null)
                         .WithMany("SalaryHistories")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -201,8 +380,6 @@ namespace EmployeesApp.Data.Migrations
                         .HasForeignKey("PositionId")
                         .OnDelete(DeleteBehavior.ClientNoAction)
                         .IsRequired();
-
-                    b.Navigation("Employee");
 
                     b.Navigation("Position");
                 });

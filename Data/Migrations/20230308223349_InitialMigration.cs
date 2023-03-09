@@ -15,7 +15,8 @@ namespace EmployeesApp.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsManager = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -116,6 +117,87 @@ namespace EmployeesApp.Data.Migrations
                         column: x => x.PositionId,
                         principalTable: "Positions",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "Positions",
+                columns: new[] { "Id", "IsManager", "Title" },
+                values: new object[,]
+                {
+                    { 1, false, "Back-end developer" },
+                    { 2, false, "Front-end developer" },
+                    { 3, false, "Full-stack developer" },
+                    { 4, false, "UI designer" },
+                    { 5, true, "Software development manager" },
+                    { 6, false, "Software test engineer" },
+                    { 7, true, "Lead developer" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "Id", "FirstName", "LastName", "ManagerId", "PositionId", "Salary", "VacationDays" },
+                values: new object[] { 2, "Harry", "Williams", null, 5, 1141m, 13 });
+
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "Id", "FirstName", "LastName", "ManagerId", "PositionId", "Salary", "VacationDays" },
+                values: new object[] { 4, "Simone", "Harper", null, 7, 1362m, 16 });
+
+            migrationBuilder.InsertData(
+                table: "Bonuses",
+                columns: new[] { "Id", "BonusType", "EmployeeId" },
+                values: new object[,]
+                {
+                    { 2, 2, 2 },
+                    { 4, 2, 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Deductions",
+                columns: new[] { "Id", "DeductionType", "EmployeeId" },
+                values: new object[,]
+                {
+                    { 2, 1, 2 },
+                    { 4, 1, 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "Id", "FirstName", "LastName", "ManagerId", "PositionId", "Salary", "VacationDays" },
+                values: new object[,]
+                {
+                    { 1, "Shannon", "Smith", 2, 1, 1141m, 10 },
+                    { 3, "Charles", "King", 2, 2, 1235m, 20 },
+                    { 5, "Emma", "Taylor", 4, 6, 1141m, 13 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Bonuses",
+                columns: new[] { "Id", "BonusType", "EmployeeId" },
+                values: new object[,]
+                {
+                    { 1, 0, 1 },
+                    { 3, 3, 3 },
+                    { 5, 1, 5 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Deductions",
+                columns: new[] { "Id", "DeductionType", "EmployeeId" },
+                values: new object[,]
+                {
+                    { 1, 0, 1 },
+                    { 3, 1, 3 },
+                    { 5, 2, 5 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SalaryHistories",
+                columns: new[] { "Id", "Date", "EmployeeId", "PositionId", "Salary" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2015, 3, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 2350m },
+                    { 2, new DateTime(2018, 4, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2, 2450m }
                 });
 
             migrationBuilder.CreateIndex(

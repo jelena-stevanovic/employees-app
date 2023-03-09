@@ -2,7 +2,7 @@
 
 <div class="container mt-3" *ngIf="data$ | async as data; else loading">
   <div class="row mt-2 justify-content-center">
-    <h2>Create Employee</h2>
+    <h2>{{title}}</h2>
   </div>
 
   <form #ngEmployee="ngForm" name="form" (ngSubmit)="saveEmployee(data.employee)" novalidate>
@@ -11,19 +11,20 @@
       <div class="col-sm-2"></div>
       <div class="col-sm-8">
         <div class="card card-container p-3">
+
           <div class="form-group">
-            <label for="firstName">First Name</label>
+            <label for="firstName">First name</label>
             <input type="text" class="form-control" name="firstName" [(ngModel)]="data.employee.firstName" firstName
-                   #firstName="ngModel" required/>
+              #firstName="ngModel" required />
             <div class="alert-danger" *ngIf="ngEmployee.submitted && firstName.errors">
               <div *ngIf="firstName.errors['required']">Invalid First Name</div>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="lastName">last Name</label>
+            <label for="lastName">Last name</label>
             <input type="text" class="form-control" name="lastName" [(ngModel)]="data.employee.lastName" lastName
-                   #lastName="ngModel" required/>
+              #lastName="ngModel" required />
             <div class="alert-danger" *ngIf="ngEmployee.submitted && lastName.errors">
               <div *ngIf="lastName.errors['required']">Invalid Last Name</div>
             </div>
@@ -32,23 +33,45 @@
           <div class="form-group">
             <label for="salary">Salary</label>
             <input type="text" class="form-control" name="salary" [(ngModel)]="data.employee.salary" salary
-                   #salary="ngModel" required/>
+              #salary="ngModel" required />
             <div class="alert-danger" *ngIf="ngEmployee.submitted && salary.errors">
               <div *ngIf="salary.errors['required']">Invalid Salary</div>
             </div>
           </div>
 
           <div class="form-group">
+            <label for="vacationDays">Vacation days</label>
+            <input type="number" class="form-control" name="vacationDays" [(ngModel)]="data.employee.vacationDays"
+              vacationDays #vacationDays="ngModel" required />
+            <div class="alert-danger" *ngIf="ngEmployee.submitted && vacationDays.errors">
+              <div *ngIf="vacationDays.errors['required']">Invalid Vacation Days</div>
+            </div>
+          </div>
+
+          <div class="form-group">
             <label for="positionId">Position</label>
 
-            <select class="custom-select" aria-label="Default select example" name="positionId" [(ngModel)]="data.employee.positionId" positionId #positionId="ngModel" required>
+            <select class="custom-select" aria-label="Default select example" name="positionId"
+              [(ngModel)]="data.employee.positionId" positionId #positionId="ngModel" required>
               <option value="" selected>Slecet Position</option>
-              <option *ngFor="let position of data.positions.positions" [value]="position.id">{{ position.title }}</option>
+              <option *ngFor="let position of data.positions.positions" [value]="position.id">{{ position.title }}
+              </option>
             </select>
 
             <div class="alert-danger" *ngIf="ngEmployee.submitted && positionId.errors">
               <div *ngIf="positionId.errors['required']">Invalid Position Id</div>
             </div>
+          </div>
+
+          <div class="form-group">
+            <label for="managerId">Manager</label>
+
+            <select class="custom-select" aria-label="Default select example" name="managerId"
+              [(ngModel)]="data.employee.managerId" managerId #managerId="ngModel" required>
+              <option value="" selected>Slecet Manager</option>
+              <option *ngFor="let manager of data.managers" [value]="manager.id">{{manager.firstName + ' ' +
+                manager.lastName }}</option>
+            </select>
           </div>
 
         </div>

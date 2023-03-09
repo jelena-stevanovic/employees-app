@@ -12,10 +12,7 @@ import {Position} from "../api/models/position";
 export class PositionsComponent implements OnInit {
 
   position$: Observable<Position> | undefined;
-  position = {
-    id: 0,
-    title: ''
-  }
+  position: Position = getEmptyPosition();
   isNew = false;
 
   private positionId = 0;
@@ -28,36 +25,22 @@ export class PositionsComponent implements OnInit {
       map((p) => p['id']),
       switchMap((id) => {
         this.isNew = id == 0;
-        this.positionId = id;
         return this.isNew ? of(getEmptyPosition()) : this.positionService.getPosition(id);
       })
     );
   }
 
-  updatePosition(position: Position) {
-    console.log('inside updateposition');
-    console.log(`position id is ${position.id}`);
-    this.position$ = of(this.getPosition(position));
-  }
-
-  getPosition(position: Position): Position {
-    return {
-      ...getEmptyPosition(),
-      ...position,
-    }
-  }
-
   savePosition(position: Position) {
     this.positionService.savePosition(position).subscribe((result) => {
-      this.router.navigate(['/positions', result.position.id]);
+      this.router.navigate(['/positions']);
     });
   }
-
 }
 
 function getEmptyPosition(): Position {
   return {
     id: 0,
-    title: ''
+    title: '',
+    isManager: false
   }
 }

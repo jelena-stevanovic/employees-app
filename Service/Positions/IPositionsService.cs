@@ -4,9 +4,9 @@ namespace EmployeesApp.Service.Positions;
 
 public interface IPositionsService
 {
-    Task<GetPositionsResponse> GetPositions();
+        Task<GetPositionsResponse> GetPositions();
 
-    Task<SavePositionResponse> SavePosition(SavePositionRequest position);
+        Task<SavePositionResponse> SavePosition(SavePositionRequest position);
 
-    Task<DeletePositionResponse> DeletePosition(int positionId);
+        Task<DeletePositionResponse> DeletePosition(int positionId);
 }

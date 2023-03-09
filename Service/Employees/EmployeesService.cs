@@ -17,7 +17,11 @@ public class EmployeesService : IEmployeesService
     public async Task<GetEmployeesResponse> GetEmployees()
     {
         var empolyees = await dbContext.Employees
-            .Include(i => i.SalaryHistories)
+            .Include(e => e.Position)
+            .Include(e => e.Manager)
+            .Include(e => e.Bonuses)
+            .Include(e => e.Deductions)
+            .Include(e => e.SalaryHistories)
             .ToListAsync();
 
         return new GetEmployeesResponse { Success = true, Employees = empolyees };
@@ -29,20 +33,27 @@ public class EmployeesService : IEmployeesService
             ? new Employee()
             : dbContext.Employees.FirstOrDefault(i => i.Id == employee.Id);
 
+        var oldSalary = entry.Salary;
+
         entry.Id = employee.Id;
         entry.Salary = employee.Salary;
         entry.FirstName = employee.FirstName;
         entry.LastName = employee.LastName;
         entry.PositionId = employee.PositionId;
+        entry.ManagerId = employee.ManagerId;
+        entry.VacationDays = employee.VacationDays;
 
-        entry = employee.Id == 0 ? (await dbContext.Employees.AddAsync(entry)).Entity : entry;
-
-        if (employee.Salary != entry.Salary)
+        if (employee.Id == 0)
         {
-            await UpdateSalaryHistory(entry);
+            await dbContext.Employees.AddAsync(entry); 
         }
 
         var saveResponse = await dbContext.SaveChangesAsync();
+
+        if (oldSalary != employee.Salary)
+        {
+            await UpdateSalaryHistory(entry);
+        }
 
         return saveResponse >= 0
             ? new SaveEmployeeResponse { Success = true, Employee = entry }
@@ -74,7 +85,7 @@ public class EmployeesService : IEmployeesService
             PositionId = employee.PositionId,
             EmployeeId = employee.Id,
             Salary = employee.Salary,
-            Date = new DateTime()
+            Date = DateTime.Now
         });
         return dbContext.SaveChangesAsync();
     }

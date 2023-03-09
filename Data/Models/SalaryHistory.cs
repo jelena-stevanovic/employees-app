@@ -12,11 +12,9 @@ public class SalaryHistory
 
     public int EmployeeId { get; set; }
     
-    public Employee Employee { get; set; }
-    
     public int PositionId { get; set; }
     
     public Position Position { get; set; }
-    
-    public DateTime Date { get; set; }
+
+    public DateTime Date { get; set; } 
 }

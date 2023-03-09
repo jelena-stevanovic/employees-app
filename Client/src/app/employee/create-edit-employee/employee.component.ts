@@ -8,7 +8,8 @@ import {GetPositionsResponse} from "../../api/models/position";
 
 interface ViewModel {
   employee: Employee,
-  positions: GetPositionsResponse
+  positions: GetPositionsResponse,
+  managers: Employee[]
 }
 
 @Component({
@@ -21,6 +22,7 @@ export class EmployeeComponent implements OnInit {
   data$: Observable<ViewModel> | undefined;
 
   private employeeId = 0;
+  title: string = '';
 
   constructor(
     private employeeService: EmployeeService,
@@ -42,32 +44,33 @@ export class EmployeeComponent implements OnInit {
 
   saveEmployee(employee: Employee) {
     this.employeeService.saveEmployee(employee).subscribe((result) => {
-      this.router.navigate(['/employees', result.employee.id]);
+      this.router.navigate(['/employees']);
     });
   }
 
   getData(employeeId: number): Observable<ViewModel> {
     const positions$ = this.positionsService.getPositions();
-    const creating = !employeeId || employeeId == 0;
+    const managers$ = this.employeeService.getManagers();
+    const creating = employeeId == 0;
+    this.title = creating ? 'Create employee' : 'Edit employee';
     const employees$ = creating ? of(emptyEmployee) : this.employeeService.getEmployee(employeeId)
 
     return forkJoin({
       positions: positions$,
-      employee: employees$
+      employee: employees$,
+      managers: managers$
     });
   }
 
 }
 
-const emptyEmployee = {
+const emptyEmployee: Employee = {
   id: 0,
   firstName: 'First Name',
   lastName: 'Last Name',
   salary: 0,
   positionId: '',
-  position: {
-    id: 0,
-    title: ''
-  },
-  salaryHistory: [],
+  managerId: '',
+  vacationDays: 0,
+  salaryHistories: [],
 }

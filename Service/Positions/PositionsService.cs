@@ -31,6 +31,7 @@ public class PositionsService : IPositionsService
 
         entry.Id = position.Id;
         entry.Title = position.Title;
+        entry.IsManager = position.IsManager;
 
         entry = position.Id == 0 ? (await dbContext.Positions.AddAsync(entry)).Entity : entry;
 

@@ -1,0 +1,69 @@
+<ng-template #loading>Loading...</ng-template>
+
+<div class="container mt-3" *ngIf="data$ | async as data; else loading">
+  <div class="row mt-2 justify-content-center">
+    <h2>Employee Details</h2>
+  </div>
+
+  <div class="row mt-1 mb-3">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+      <div class="card card-container p-3">
+
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <span class="form-control" name="firstName">{{data.firstName}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <span class="form-control" name="lastName">{{data.lastName}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="positionId">Position</label>
+          <span class="form-control" name="position">{{data.position?.title}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="salary">Salary</label>
+          <span class="form-control" name="salary">{{data.salary}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="salary">Vacation Days</label>
+          <span class="form-control" name="vacationDays">{{data.vacationDays}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="manager">Manager</label>
+          <span class="form-control" name="manager">{{data.manager ? data.manager.firstName + ' ' +
+            data.manager.lastName : 'No manager' }}</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-sm-2"></div>
+  </div>
+
+  <div class="row mt-2 justify-content-center">
+    <h2>Salary History</h2>
+  </div>
+  <app-salary-history [salaryHistories]=data.salaryHistories></app-salary-history>
+
+
+  <div class="row mt-1 mb-3">
+  </div>
+
+
+  <div class="row mt-5 mb-3 justify-content-center align-items-center">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+      <div class="form-group">
+        <input type="submit" class="form-control btn btn-success" value="Save Employee">
+      </div>
+    </div>
+    <div class="col-sm-2"></div>
+  </div>
+
+</div>

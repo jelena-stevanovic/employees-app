@@ -9,6 +9,8 @@ import {EmployeeComponent} from "./employee/create-edit-employee/employee.compon
 import {EmployeeListComponent} from "./employee/employee-list/employee-list.component";
 import {PositionsComponent} from "./position/positions.component";
 import {PositionListComponent} from "./position/position-list/position-list.component";
+import { EmployeeDetailsComponent } from './employee/employee-details/employee-details.component';
+import { SalaryHistoryComponent } from './salary-history/salary-history.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import {PositionListComponent} from "./position/position-list/position-list.comp
     EmployeeComponent,
     EmployeeListComponent,
     PositionsComponent,
-    PositionListComponent
+    PositionListComponent,
+    EmployeeDetailsComponent,
+    SalaryHistoryComponent
   ],
   imports: [
     BrowserModule,

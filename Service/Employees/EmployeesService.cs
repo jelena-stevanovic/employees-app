@@ -36,12 +36,14 @@ public class EmployeesService : IEmployeesService
         var oldSalary = entry.Salary;
 
         entry.Id = employee.Id;
-        entry.Salary = employee.Salary;
         entry.FirstName = employee.FirstName;
         entry.LastName = employee.LastName;
+        entry.HireDate = employee.Id == 0 ? DateTime.Now : entry.HireDate;
+        entry.Salary = employee.Salary;
         entry.PositionId = employee.PositionId;
         entry.ManagerId = employee.ManagerId;
         entry.VacationDays = employee.VacationDays;
+        
 
         if (employee.Id == 0)
         {

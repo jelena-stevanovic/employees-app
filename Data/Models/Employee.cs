@@ -16,7 +16,9 @@ public class Employee
     public int PositionId { get; set; }
 
     public Position Position { get; set; }
-    
+
+    public DateTime HireDate { get; set; }
+
     public decimal Salary { get; set; }
     
     public int VacationDays { get; set; }

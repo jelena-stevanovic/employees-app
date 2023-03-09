@@ -26,6 +26,12 @@
         </div>
 
         <div class="form-group">
+          <label for="manager">Manager</label>
+          <span class="form-control" name="manager">{{data.manager ? data.manager.firstName + ' ' +
+            data.manager.lastName : 'No manager' }}</span>
+        </div>
+
+        <div class="form-group">
           <label for="salary">Salary</label>
           <span class="form-control" name="salary">{{data.salary}}</span>
         </div>
@@ -35,13 +41,8 @@
           <span class="form-control" name="vacationDays">{{data.vacationDays}}</span>
         </div>
 
-        <div class="form-group">
-          <label for="manager">Manager</label>
-          <span class="form-control" name="manager">{{data.manager ? data.manager.firstName + ' ' +
-            data.manager.lastName : 'No manager' }}</span>
-        </div>
-      </div>
 
+      </div>
     </div>
     <div class="col-sm-2"></div>
   </div>

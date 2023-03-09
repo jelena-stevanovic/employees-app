@@ -44,6 +44,7 @@ public class ApplicationDbContext : DbContext
             Id = 1,
             FirstName = "Shannon",
             LastName = "Smith",
+            HireDate = new DateTime(2019, 5, 30),
             PositionId = 1,
             ManagerId = 2,
             Salary = 1141,
@@ -55,9 +56,10 @@ public class ApplicationDbContext : DbContext
             Id = 2,
             FirstName = "Harry",
             LastName = "Williams",
+            HireDate = new DateTime(2017, 9, 30),
             PositionId = 5,
             ManagerId = null,
-            Salary = 1141,
+            Salary = 2000,
             VacationDays = 13
         });
 
@@ -66,6 +68,7 @@ public class ApplicationDbContext : DbContext
             Id = 3,
             FirstName = "Charles",
             LastName = "King",
+            HireDate = new DateTime(2018, 9, 1),
             PositionId = 2,
             ManagerId = 2,
             Salary = 1235,
@@ -77,9 +80,10 @@ public class ApplicationDbContext : DbContext
             Id = 4,
             FirstName = "Simone",
             LastName = "Harper",
+            HireDate = new DateTime(2017, 10, 1),
             PositionId = 7,
             ManagerId = null,
-            Salary = 1362,
+            Salary = 2000,
             VacationDays = 16
         });
 
@@ -90,7 +94,7 @@ public class ApplicationDbContext : DbContext
             LastName = "Taylor",
             PositionId = 6,
             ManagerId = 4,
-            Salary = 1141,
+            Salary = 1300,
             VacationDays = 13
         });
 
@@ -167,19 +171,38 @@ public class ApplicationDbContext : DbContext
         builder.Entity<SalaryHistory>().HasData(new SalaryHistory
         {
             Id = 1,
-            Salary = 2350,
+            Salary = 1850,
             EmployeeId = 1,
             PositionId = 1,
-            Date = new DateTime(2015, 3, 29)
+            Date = new DateTime(2020, 3, 29)
         });
 
         builder.Entity<SalaryHistory>().HasData(new SalaryHistory
         {
             Id = 2,
-            Salary = 2450,
-            EmployeeId = 3,
-            PositionId = 2,
+            Salary = 3000,
+            EmployeeId = 2,
+            PositionId = 5,
             Date = new DateTime(2018, 4, 30)
         });
+
+        builder.Entity<SalaryHistory>().HasData(new SalaryHistory
+        {
+            Id = 3,
+            Salary = 1800,
+            EmployeeId = 3,
+            PositionId = 2,
+            Date = new DateTime(2019, 2, 1)
+        });
+
+        builder.Entity<SalaryHistory>().HasData(new SalaryHistory
+        {
+            Id = 4,
+            Salary = 2800,
+            EmployeeId = 4,
+            PositionId = 7,
+            Date = new DateTime(2018, 4, 1)
+        });
     }
+
 }
